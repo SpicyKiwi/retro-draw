@@ -30,13 +30,16 @@ const App = () => {
    * - cellList, setCellList initialized to buildCellList()
    */
 
+  const [activeColor, setActiveColor] = useState(COLORS[0])
+  const [cellList, setCellList] = useState(buildCellList())
+
   return <div className="app">
     {/* Header needs no props */}
     <Header />
     {/* Palette needs to be passed activeColor and setActiveColor */}
-    <Palette />
+    <Palette activeColor={activeColor} setActiveColor={setActiveColor}/>
     {/* Grid needs to be passed activeColor, cellList, and setCellList */}
-    <Grid />
+    <Grid cellList={cellList} setCellList={setCellList} activeColor={activeColor}/>
     {/* ActionPanel needs to be passed activeColor, cellList, and setCellList */}
     <ActionPanel />
   </div>
