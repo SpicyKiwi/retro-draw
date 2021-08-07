@@ -12,7 +12,7 @@ const ActionPanel = (props) => {
    * Create constants for activeColor, cellList, and setCellList, reading them from the props
    */
   const activeColor = props.activeColor
-  const cellList = props.cellList
+  const ogCellList = props.cellList
   const setCellList = props.setCellList
 
   return <div className="action-panel">
@@ -51,9 +51,14 @@ const ActionPanel = (props) => {
     */}
     <button onClick={() => {
       const newCellList = buildCellList()
-      console.log(newCellList)
-      cellList.forEach((cell, index) => {
-        cell.color ? newCellList[index.color] = cell[index.color] : newCellList[index.color] = activeColor
+      ogCellList.forEach((cell, index) => {
+        if(cell.color === null) {
+          newCellList[index].color = activeColor
+        } else {
+          newCellList[index].color = cell.color
+        }
+
+        setCellList(newCellList)
       })
     }}>fill empty</button>
   </div>
