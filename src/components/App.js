@@ -12,10 +12,7 @@ import ActionPanel from './ActionPanel';
  * We need access to COLORS and buildCellList for our initial
  * state objects
  */
-import {
-  COLORS,
-  buildCellList
-} from '../utils';
+import { COLORS, buildCellList } from '../utils';
 
 const getCellListFromLocal = () => {
   
@@ -26,7 +23,6 @@ const getCellListFromLocal = () => {
   }
 
   return buildCellList()
-
 }
 
 const setCellListOnLocal = (cellList) => {
@@ -49,17 +45,16 @@ const App = () => {
   const [activeColor, setActiveColor] = useState(COLORS[0])
   const [cellList, _setCellList] = useState([])
 
-  const setCellList = (newCellList) => {
+  function setCellList(newCellList) {
     setCellListOnLocal(newCellList)
     _setCellList(newCellList)
+
+    
+  }
+
   useEffect(() => {
     _setCellList(getCellListFromLocal())
   }, [])
-
-  }
-
-  
-
 
   return <div className="app">
     {/* Header needs no props */}
@@ -67,9 +62,9 @@ const App = () => {
     {/* Palette needs to be passed activeColor and setActiveColor */}
     <Palette activeColor={activeColor} setActiveColor={setActiveColor}/>
     {/* Grid needs to be passed activeColor, cellList, and setCellList */}
-    <Grid cellList={cellList} setCellList={_setCellList} activeColor={activeColor}/>
+    <Grid cellList={cellList} setCellList={setCellList} activeColor={activeColor}/>
     {/* ActionPanel needs to be passed activeColor, cellList, and setCellList */}
-    <ActionPanel activeColor={activeColor} cellList={cellList} setCellList={_setCellList}/>
+    <ActionPanel activeColor={activeColor} cellList={cellList} setCellList={setCellList}/>
   </div>
 }
 
